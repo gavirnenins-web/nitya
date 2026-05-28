@@ -1,3 +1,11 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('register.html')
+
 @app.route('/register', methods=['POST'])
 def register():
     name = request.form['name']
@@ -13,4 +21,7 @@ def register():
     with open('users.txt', 'a') as file:
         file.write(f"{name}, {email}, {password}\n")
 
-    return f"User {name} registered successfully!"
+    return render_template('success.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
