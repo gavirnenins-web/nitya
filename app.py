@@ -4,6 +4,9 @@ def register():
     email = request.form['email']
     password = request.form['password']
 
+    if "@" not in email:
+        return "Invalid email address!"
+
     if len(password) < 6:
         return "Password must be at least 6 characters!"
 
